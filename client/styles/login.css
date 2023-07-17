@@ -1,0 +1,19 @@
+  .container-login {
+      text-align: center;
+  }
+
+  .logo-login {
+      font-size: 48px;
+  }
+
+  .form-login {
+      margin-top: 20px;
+  }
+
+  .form-group {
+      margin-bottom: 10px;
+  }
+
+  .link-login {
+      margin-top: 10px;
+  }
