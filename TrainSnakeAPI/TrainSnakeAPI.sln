@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainSnakeAPI", "TrainSnakeAPI\TrainSnakeAPI.csproj", "{6B4EE6B4-828C-456B-A02E-9954DF23042A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B4EE6B4-828C-456B-A02E-9954DF23042A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B4EE6B4-828C-456B-A02E-9954DF23042A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B4EE6B4-828C-456B-A02E-9954DF23042A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B4EE6B4-828C-456B-A02E-9954DF23042A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6639C123-C387-49B1-91D8-2C9531D6293A}
+	EndGlobalSection
+EndGlobal
