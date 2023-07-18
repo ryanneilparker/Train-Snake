@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scores</title>
     <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
   </head>
   <body>
+    <header>
+      <nav>
+        <div id="navbar"></div>
+      </nav>
+    </header>
+
     <section class="table-scores">
       <h1>Scoreboard</h1>
-
       <table>
         <thead>
           <tr>
@@ -23,9 +29,10 @@
       </table>
     </section>
 
-    <script src="./scripts/scores.js"></script>
+    <script src="../scripts/scores.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../scripts/include.js"></script>
 
-    <!-- This is for development purposes and can be removed later. -->
   <!-- This is for development purposes and can be removed later. -->
   <section class="dev">
     <h2>This section is for development purposes:</h2>
