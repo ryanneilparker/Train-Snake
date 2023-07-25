@@ -58,15 +58,25 @@ if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
 	app.UseSwaggerUI();
+
+  app.UseFileServer(new FileServerOptions
+  {
+    FileProvider = new PhysicalFileProvider(
+      Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
+    RequestPath = "/StaticFiles",
+    EnableDefaultFiles = true
+  });
+}
+else{
+  app.UseFileServer(new FileServerOptions
+  {
+    FileProvider = new PhysicalFileProvider(
+      Path.Combine("TrainSnakeAPI/TrainSnakeAPI", "StaticFiles")),
+    RequestPath = "/StaticFiles",
+    EnableDefaultFiles = true
+  });
 }
 
-app.UseFileServer(new FileServerOptions
-{
-	FileProvider = new PhysicalFileProvider(
-		Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
-	RequestPath = "/StaticFiles",
-	EnableDefaultFiles = true
-});
 
 app.UseHttpsRedirection();
 
