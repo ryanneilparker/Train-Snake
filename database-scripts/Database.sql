@@ -1,6 +1,9 @@
 CREATE DATABASE [TrainSnakeDB];
 GO
 
+USE TrainSnakeDB
+GO;
+
 CREATE TABLE [dbo].Player
 (
 	[Id] INT IDENTITY(1,1) PRIMARY KEY NOT NULL , 

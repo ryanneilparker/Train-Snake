@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
 using TrainSnakeAPI.Data;
+using TrainSnakeAPI.Models;
+using TrainSnakeAPI.Utilities;
 
 namespace TrainSnakeAPI.Controllers
 {
@@ -13,6 +15,7 @@ namespace TrainSnakeAPI.Controllers
 	public class PlayerController : ControllerBase
 	{
 		private readonly TrainSnakeDbContext dbContext;
+		private Utilities.Utilities utils = new Utilities.Utilities();
 
 		public PlayerController(TrainSnakeDbContext dbContext)
 		{
@@ -28,9 +31,17 @@ namespace TrainSnakeAPI.Controllers
 			var loginName = HttpContext.User.FindFirstValue(ClaimTypes.Name);
 			var id = HttpContext.User.FindFirstValue("sub");
 
-			return Redirect("http://127.0.0.1:5500/client/markup/game.html?access_token=" + accessToken);
-				 // Return the login name and ID as an IEnumerable<string>
-			//return new List<string> { $"Login Name: {loginName}", $"ID: {id}" };
+			var existingPlayer = dbContext.Player.FirstOrDefault(p => p.UserName == loginName);
+
+			if(existingPlayer == null)
+			{
+				Player tempPlayer = new Player() { UserName = loginName, CreatedDate = DateTime.Now };
+
+				dbContext.Add(tempPlayer);
+				dbContext.SaveChanges();
+			}			
+
+			return Redirect(Environment.GetEnvironmentVariable("FrontEnd_URL") + "/client/markup/game.html?access_token=" + accessToken);
 		}
 
 		[HttpGet]
@@ -38,9 +49,18 @@ namespace TrainSnakeAPI.Controllers
 		public IActionResult LoginUser()
 		{
 			Console.WriteLine("At login get");
-			return Challenge(new AuthenticationProperties { RedirectUri = "https://localhost:7223/githubOAuth" }, "github");
+			return Challenge(new AuthenticationProperties { RedirectUri = Environment.GetEnvironmentVariable("API_URL") + "/githubOAuth" }, "github");
 		}
 
 		//Update - Score
+		[HttpPut("score")]
+		public async Task<IActionResult> UpdateUserScore()
+		{
+			bool isAuthorised = await utils.AuthoriseRequest(Request);
+
+			// Add logic to update the user's score
+
+			return BadRequest();
+		}
 	}
 }

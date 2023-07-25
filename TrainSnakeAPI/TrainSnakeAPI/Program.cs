@@ -20,8 +20,8 @@ builder.Services.AddAuthentication("cookie")
 	.AddOAuth("github", options =>
 {
 	options.SignInScheme = "cookie";
-	options.ClientId = "dbcb351469e2d18cf2af";
-	options.ClientSecret = "b3e037f216648d0793f271c9b019e22341b54d2c";
+	options.ClientId = Environment.GetEnvironmentVariable("ClientId") ?? "error";
+	options.ClientSecret = Environment.GetEnvironmentVariable("ClientSecret") ?? "error";
 	options.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
 	options.TokenEndpoint = "https://github.com/login/oauth/access_token";
 	options.CallbackPath = "/oauth/github-cb";
@@ -44,7 +44,7 @@ builder.Services.AddCors(options =>
 {
 	options.AddDefaultPolicy(builder =>
 	{
-		builder.WithOrigins("http://127.0.0.1:5500")
+		builder.WithOrigins(Environment.GetEnvironmentVariable("FrontEnd_URL") ?? "error")
 		.AllowAnyHeader()
 		.AllowAnyMethod();
 	});

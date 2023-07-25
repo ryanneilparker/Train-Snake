@@ -11,6 +11,7 @@ namespace TrainSnakeAPI.Data
 		{
 		}
 
-		public DbSet<Player> player { get; set; }
+		public DbSet<Player> Player { get; set; }
+		public DbSet<GameLog> GameLog { get; set; }
 	}
 }
