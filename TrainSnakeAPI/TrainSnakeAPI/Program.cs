@@ -71,7 +71,7 @@ else{
   app.UseFileServer(new FileServerOptions
   {
     FileProvider = new PhysicalFileProvider(
-      Path.Combine("TrainSnakeAPI/TrainSnakeAPI", "StaticFiles")),
+      Path.Combine(Directory.GetCurrentDirectory(), "TrainSnakeAPI/TrainSnakeAPI/StaticFiles")),
     RequestPath = "/StaticFiles",
     EnableDefaultFiles = true
   });
