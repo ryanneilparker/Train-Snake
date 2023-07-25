@@ -1,11 +1,13 @@
 /* Import Google font */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
 }
+
 body {
   display: flex;
   flex-direction: column;
@@ -41,6 +43,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
 .play-board {
   height: 100%;
   width: 100%;
@@ -48,12 +51,13 @@ body {
   background: #212837;
   grid-template: repeat(20, 1fr) / repeat(20, 1fr);
 }
+
 .play-board .food {
   height: 100%;
   width: 100%;
 }
+
 .play-board .head {
   height: 100%;
   width: 100%;
 }
-
