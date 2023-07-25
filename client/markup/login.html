@@ -1,63 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login/Signup</title>
+  <title>Login</title>
   <link rel="stylesheet" href="../styles/global.css">
   <link rel="stylesheet" href="../styles/login.css" />
-</head>
-<body>
   <script src="../scripts/config.js"></script>
+</head>
+
+<body>
   <section class="container-login">
     <section class="logo-login">
       <h1>🐍</h1>
     </section>
 
-      <section class="heading-login">
-        <h2>Login</h2>
-      </section>
-
-    <!-- <section class="form-login">
-      <form>
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required />
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-        <div class="form-group">
-          <button type="submit">Log In</button>
-        </div>
-      </form>
+    <section class="heading-login">
+      <h2>Train Snake</h2>
     </section>
 
-    <section class="link-login">
-      <p>Don't have an account? <a href="/signup"> Signup.</a></p>
-    </section>
-  </section> -->
+    <button type="submit" id="loginButton">Log In</button>
 
-  <button type="submit" id="loginButton">Log In</button>
-
-  <!-- This is for development purposes and can be removed later. -->
-  <section class="dev">
-    <h2>This section is for development purposes:</h2>
-    <ul>
-      <li><a href="#" id="gameLink">Go to Game page.</a></li>
-      <li><a href="./login.html">Go to Login page.</a></li>
-      <li><a href="./scores.html">Go to Scores page.</a></li>
-    </ul>
-  </section>
-  <script>
-      const loginButton = document.getElementById('loginButton');
-      const apiUrl = configURL.apiUrl + '/player/login';
-      loginButton.addEventListener('click', () => {
-      // Redirect to your API's login endpoint
-        window.location.href = apiUrl;
-      });
-  </script>
-  
+    <script src="../scripts/login.js"></script>
 </body>
+
 </html>
