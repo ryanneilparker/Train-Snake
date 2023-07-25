@@ -20,7 +20,7 @@ highScoreElement.innerText = `High Score: ${highScore}`;
 const updateFoodPosition = () => {
     // Passing a random 1 - 30 value as food position
     foodX = Math.floor(Math.random() * heightWidth) + 1;
-    foodY = Math.floor(Math.random() * heightWidth);
+    foodY = Math.floor(Math.random() * heightWidth) + 1;
 }
 
 const handleGameOver = () => {
@@ -48,6 +48,7 @@ const changeDirection = e => {
 }
 
 const initGame = () => {
+    
     if(gameOver) return handleGameOver();
     let html = `<img class="food" 
     src="../resources/beer.png"
