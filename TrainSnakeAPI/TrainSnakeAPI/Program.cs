@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
@@ -58,6 +59,14 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
+
+app.UseFileServer(new FileServerOptions
+{
+	FileProvider = new PhysicalFileProvider(
+		Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
+	RequestPath = "/StaticFiles",
+	EnableDefaultFiles = true
+});
 
 app.UseHttpsRedirection();
 

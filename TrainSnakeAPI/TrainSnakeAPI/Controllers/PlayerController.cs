@@ -41,7 +41,7 @@ namespace TrainSnakeAPI.Controllers
 				dbContext.SaveChanges();
 			}			
 
-			return Redirect(Environment.GetEnvironmentVariable("FrontEnd_URL") + "/client/markup/game.html?access_token=" + accessToken);
+			return Redirect("StaticFiles/markup/game.html?access_token=" + accessToken);
 		}
 
 		[HttpGet]
@@ -49,7 +49,7 @@ namespace TrainSnakeAPI.Controllers
 		public IActionResult LoginUser()
 		{
 			Console.WriteLine("At login get");
-			return Challenge(new AuthenticationProperties { RedirectUri = Environment.GetEnvironmentVariable("API_URL") + "/githubOAuth" }, "github");
+			return Challenge(new AuthenticationProperties { RedirectUri = "/githubOAuth" }, "github");
 		}
 
 		//Update - Score

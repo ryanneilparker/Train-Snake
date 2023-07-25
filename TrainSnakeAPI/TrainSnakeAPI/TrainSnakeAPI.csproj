@@ -7,6 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="StaticFiles\markup\game.html" />
+    <Content Include="StaticFiles\markup\howto.html" />
+    <Content Include="StaticFiles\index.html" />
+    <Content Include="StaticFiles\markup\navbar.html" />
+    <Content Include="StaticFiles\markup\scores.html" />
+    <Content Include="StaticFiles\markup\signup.html" />
+    <Content Include="StaticFiles\resources\beer.png" />
+    <Content Include="StaticFiles\resources\car.png" />
+    <Content Include="StaticFiles\resources\train.png" />
+    <Content Include="StaticFiles\scripts\config.js" />
+    <Content Include="StaticFiles\scripts\game.js" />
+    <Content Include="StaticFiles\scripts\include.js" />
+    <Content Include="StaticFiles\scripts\navbar.js" />
+    <Content Include="StaticFiles\scripts\scores.js" />
+    <Content Include="StaticFiles\styles\game.css" />
+    <Content Include="StaticFiles\styles\global.css" />
+    <Content Include="StaticFiles\styles\login.css" />
+    <Content Include="StaticFiles\styles\navbar.css" />
+    <Content Include="StaticFiles\styles\signup.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
@@ -14,6 +36,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

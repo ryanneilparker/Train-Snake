@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login/Signup</title>
+  <link rel="stylesheet" href="./styles/global.css">
+  <link rel="stylesheet" href="./styles/login.css" />
+</head>
+<body>
+  <section class="container-login">
+    <section class="logo-login">
+      <h1>🐍</h1>
+    </section>
+
+      <section class="heading-login">
+        <h2>Login</h2>
+      </section>
+
+  <button type="submit" id="loginButton">Log In</button>
+  </section>
+  <script>
+      const loginButton = document.getElementById('loginButton');
+      const apiUrl = '/api/player/login';
+      loginButton.addEventListener('click', () => {
+      // Redirect to your API's login endpoint
+        window.location.href = apiUrl;
+      });
+  </script>
+  
+</body>
+</html>
