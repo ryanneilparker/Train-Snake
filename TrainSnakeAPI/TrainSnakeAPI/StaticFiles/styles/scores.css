@@ -1,0 +1,49 @@
+/* scores.css */
+
+/* Ensure the table takes full width of its container */
+.table-scores {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  /* Center the table header text */
+  .table-scores th {
+    text-align: center;
+  }
+  
+  /* Add some space around the table cells */
+  .table-scores th,
+  .table-scores td {
+    padding: 8px;
+  }
+  
+  /* Style the table header */
+  .table-scores thead th {
+    background-color: #f8f9fa; /* Light gray background */
+    border-bottom: 2px solid #dee2e6; /* Gray bottom border */
+  }
+  
+  /* Style alternating rows with a light gray background */
+  .table-scores tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  
+  /* Add borders to the table cells */
+  .table-scores th,
+  .table-scores td {
+    border: 1px solid #dee2e6;
+  }
+  
+  /* Make the table responsive on smaller screens */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  /* Center the h1 element */
+  .table-scores h1 {
+    text-align: center;
+  }
+  
