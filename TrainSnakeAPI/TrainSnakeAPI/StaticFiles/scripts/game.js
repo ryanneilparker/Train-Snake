@@ -125,7 +125,6 @@ const initGame = () => {
         snake.addFood(food.getFoodPosition()[1],food.getFoodPosition()[0]);
         score++; 
         highScore = score >= highScore ? score : highScore;
-        localStorage.setItem("high-score", highScore);
         scoreElement.innerText = `Score: ${score}`;
         highScoreElement.innerText = `High Score: ${highScore}`;
     }

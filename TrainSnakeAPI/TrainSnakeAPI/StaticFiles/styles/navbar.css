@@ -41,6 +41,11 @@ nav .list-item-logout {
     float: right;
 }
 
+	nav .list-item-user {
+		text-decoration-color: white;
+		float: right;
+	}
+
 nav .active {
     background-color: #04AA6D;
 }

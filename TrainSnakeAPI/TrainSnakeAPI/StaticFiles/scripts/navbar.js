@@ -6,6 +6,9 @@ for (var i = 0; i < links.length; i++) {
   }
 }
 
+const userField = document.getElementById("user");
+userField.innerText = "Welcome, " + localStorage.getItem("playerName");
+
 const logoutButton = document.getElementById("logout");
 logoutButton.addEventListener("click", logoutUser);
 
