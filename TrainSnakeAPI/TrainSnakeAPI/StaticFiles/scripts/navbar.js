@@ -5,3 +5,11 @@ for (var i = 0; i < links.length; i++) {
     links[i].className += " active";
   }
 }
+
+const logoutButton = document.getElementById("logout");
+logoutButton.addEventListener("click", logoutUser);
+
+function logoutUser() {
+	localStorage.clear();
+	window.location.href = "/";
+}

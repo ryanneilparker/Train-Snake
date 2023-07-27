@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<TrainSnakeDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
+builder.Services.AddDbContext<TrainSnakeDbContext>(options => options.UseSqlServer(Environment.GetEnvironmentVariable("DBConnectionString") ?? "error"));
 builder.Services.AddAuthentication("cookie")
 	.AddCookie("cookie")
 	.AddOAuth("github", options =>
@@ -41,16 +41,6 @@ builder.Services.AddAuthentication("cookie")
 	};
 });
 
-builder.Services.AddCors(options =>
-{
-	options.AddDefaultPolicy(builder =>
-	{
-		builder.WithOrigins(Environment.GetEnvironmentVariable("FrontEnd_URL") ?? "error")
-		.AllowAnyHeader()
-		.AllowAnyMethod();
-	});
-});
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,7 +53,7 @@ if (app.Environment.IsDevelopment())
   {
     FileProvider = new PhysicalFileProvider(
       Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
-    RequestPath = "/StaticFiles",
+    RequestPath = "",
     EnableDefaultFiles = true
   });
 }
@@ -72,15 +62,12 @@ else{
   {
     FileProvider = new PhysicalFileProvider(
       Path.Combine(Directory.GetCurrentDirectory(), "TrainSnakeAPI/TrainSnakeAPI/StaticFiles")),
-    RequestPath = "/StaticFiles",
+    RequestPath = "",
     EnableDefaultFiles = true
   });
 }
 
-
 app.UseHttpsRedirection();
-
-app.UseCors();
 
 app.UseAuthentication();
 
