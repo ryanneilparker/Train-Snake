@@ -25,7 +25,7 @@ builder.Services.AddAuthentication("cookie")
 	options.ClientSecret = Environment.GetEnvironmentVariable("ClientSecret") ?? "error";
 	options.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
 	options.TokenEndpoint = "https://github.com/login/oauth/access_token";
-	options.CallbackPath = new PathString("/oauth/github-cb");
+	options.CallbackPath = new PathString("/githubOAuth");
 	options.UserInformationEndpoint = "https://api.github.com/user";
 	options.SaveTokens = true;
 
