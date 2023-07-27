@@ -1,9 +1,11 @@
 ﻿using Azure.Core;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
+using System.Text.Json;
 using TrainSnakeAPI.Data;
 using TrainSnakeAPI.Models;
 using TrainSnakeAPI.Utilities;
@@ -33,15 +35,15 @@ namespace TrainSnakeAPI.Controllers
 
 			var existingPlayer = dbContext.Player.FirstOrDefault(p => p.UserName == loginName);
 
-			if(existingPlayer == null)
+			if (existingPlayer == null)
 			{
 				Player tempPlayer = new Player() { UserName = loginName, CreatedDate = DateTime.Now };
 
 				dbContext.Add(tempPlayer);
 				dbContext.SaveChanges();
-			}			
+			}
 
-			return Redirect("StaticFiles/markup/game.html?access_token=" + accessToken);
+			return Redirect("markup/game.html?access_token=" + accessToken + "&playerName=" + loginName);
 		}
 
 		[HttpGet]
@@ -52,15 +54,65 @@ namespace TrainSnakeAPI.Controllers
 			return Challenge(new AuthenticationProperties { RedirectUri = "/githubOAuth" }, "github");
 		}
 
-		//Update - Score
-		[HttpPut("score")]
-		public async Task<IActionResult> UpdateUserScore()
+		[HttpGet("score")]
+		public async Task<ActionResult> GetHighestPlayerScoreAsync(string playerName)
 		{
 			bool isAuthorised = await utils.AuthoriseRequest(Request);
 
-			// Add logic to update the user's score
+			if (!isAuthorised)
+			{
+				return Unauthorized();
+			}
 
-			return BadRequest();
+			var player = dbContext.Player.FirstOrDefault(p => p.UserName == playerName);
+
+			if (player == null)
+			{
+				return BadRequest();
+			}
+
+			int score = dbContext.GameLog.Where(p => p.PlayerId == player.Id).Select(s => s.Score).Max();
+
+			var responseObject = new
+			{
+				score
+			};
+
+			// Serialize the response object to a JSON string
+			var jsonResponse = JsonSerializer.Serialize(responseObject);
+
+			return Ok(jsonResponse);
+		}
+
+		[HttpPost("score")]
+		public async Task<ActionResult> UpdateUserScore(ScoreResult scoreResult)
+		{
+			bool isAuthorised = await utils.AuthoriseRequest(Request);
+
+			if (!isAuthorised)
+			{
+				return Unauthorized();
+			}
+			// Add logic to update the user's score
+			var player = dbContext.Player.FirstOrDefault(p => p.UserName == scoreResult.playerName);
+
+			if (player == null)
+			{
+				return BadRequest();
+			}
+
+			var gameLog = new GameLog()
+			{
+				PlayerId = player.Id,
+				Score = scoreResult.playerScore,
+				CreatedDate = DateTime.Now
+			};
+
+			await dbContext.GameLog.AddAsync(gameLog);
+
+			await dbContext.SaveChangesAsync();
+
+			return NoContent();
 		}
 	}
 }

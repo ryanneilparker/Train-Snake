@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 using System.Text.Json;
+using TrainSnakeAPI.Data;
+using TrainSnakeAPI.Models;
 using TrainSnakeAPI.Utilities;
 
 namespace TrainSnakeAPI.Controllers
@@ -10,32 +14,38 @@ namespace TrainSnakeAPI.Controllers
 	[ApiController]
 	public class ScoreBoardController : ControllerBase
 	{
+		private readonly TrainSnakeDbContext dbContext;
 		private Utilities.Utilities utils = new Utilities.Utilities();
+
+		public ScoreBoardController(TrainSnakeDbContext dbContext)
+		{
+			this.dbContext = dbContext;
+		}
 
 		// Get - Score board
 		[HttpGet]
-		public async Task<IActionResult> GetScoreBoard()
+		public async Task<ActionResult<IEnumerable<ScoreResult>>> GetScoreBoard()
 		{
 			bool isAuthorised = await utils.AuthoriseRequest(Request);
 
-			var responseObject = new
+			if (!isAuthorised)
 			{
-				success = isAuthorised,
-				message = isAuthorised ? "User authenticated" : "User not authenticated"
-			};
-
-			// Serialize the response object to a JSON string
-			var jsonResponse = JsonSerializer.Serialize(responseObject);
-
-			// Return the JSON response with appropriate status code
-			if (isAuthorised)
-			{
-				return Ok(jsonResponse); // 200 OK
+				return Unauthorized();
 			}
-			else
-			{
-				return Unauthorized(jsonResponse); // 401 Unauthorized
-			}
+
+			var highestScores = await dbContext.Player
+		.Select(player => new ScoreResult
+		{
+			playerName = player.UserName,
+			playerScore = dbContext.GameLog
+						.Where(gameLog => gameLog.PlayerId == player.Id)
+						.OrderByDescending(gameLog => gameLog.Score)
+						.Select(gameLog => gameLog.Score)
+						.FirstOrDefault()
+		})
+		.ToListAsync();
+
+			return Ok(highestScores);
 		}
 	}
 }

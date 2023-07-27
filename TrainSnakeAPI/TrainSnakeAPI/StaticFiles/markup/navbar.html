@@ -2,23 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
-    <link rel="stylesheet" href="../styles/navbar.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Navbar</title>
+	<link rel="stylesheet" href="../styles/navbar.css">
+	<script src="../scripts/navbar.js" defer></script>
 </head>
 
 <body>
     <header>
         <nav>
-            <ul class="list-nav">
-                <li><a href="./game.html">Game</a></li>
-                <li><a href="./scores.html">Scores</a></li>
-                <li class="list-item-logout"><a href="./logout">Logout</a></li>
-            </ul>
+					<ul class="list-nav">
+						<li><a href="./game.html">Game</a></li>
+						<li><a href="./scores.html">Scores</a></li>
+						<li class="list-item-logout"><a id="logout">Logout</a></li>
+						<li class="list-item-user" id="user">Welcome, user</li>
+					</ul>
         </nav>
     </header>
-
-    <script src="../scripts/navbar.js"></script>
-
+	</body>
 </html>
