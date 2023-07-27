@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using System.Net.Http.Headers;
@@ -28,6 +29,7 @@ builder.Services.AddAuthentication("cookie")
 	options.CallbackPath = new PathString("/oauth/github-cb");
 	options.UserInformationEndpoint = "https://api.github.com/user";
 	options.SaveTokens = true;
+	
 
 	options.ClaimActions.MapJsonKey("sub", "id");
 	options.ClaimActions.MapJsonKey(ClaimTypes.Name, "login");
@@ -40,6 +42,13 @@ builder.Services.AddAuthentication("cookie")
 		ctx.RunClaimActions(user);
 	};
 });
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
 
 var app = builder.Build();
 
