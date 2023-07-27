@@ -1,7 +1,8 @@
 export class Food{
 
-  constructor(heightWidth) {
+  constructor(heightWidth, beerImage) {
     this.heightWidth = heightWidth;
+    this.beerImage = beerImage;
   }
 
   updateFoodPosition(){
@@ -12,5 +13,13 @@ export class Food{
 
   getFoodPosition(){
     return [this.foodX,this.foodY];
+  }
+
+  getHtml(){
+    let html = `<img class="food" 
+    src=${this.beerImage}
+    style="grid-area: ${this.foodY} / ${this.foodX}"
+    ></img>`;
+    return html;
   }
 }
