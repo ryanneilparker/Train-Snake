@@ -51,7 +51,8 @@ namespace TrainSnakeAPI.Controllers
 		public IActionResult LoginUser()
 		{
 			Console.WriteLine("At login get");
-			return Challenge(new AuthenticationProperties { RedirectUri = "/githubOAuth" }, "github");
+			var redirectUri = "https://et4whnrya5.eu-west-1.awsapprunner.com/githubOAuth";
+			return Challenge(new AuthenticationProperties { RedirectUri = redirectUri }, "github");
 		}
 
 		[HttpGet("score")]
