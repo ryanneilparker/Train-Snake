@@ -67,6 +67,8 @@ else{
   });
 }
 
+app.UseForwardedHeaders();
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
