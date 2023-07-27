@@ -1,5 +1,11 @@
   .container-login {
+      width: 15rem;
       text-align: center;
+      padding-bottom: 50px;
+      margin-top: 200px;
+      background: linear-gradient(145deg, #CACCCF, #FFFFFF);
+      border-radius: 7%;
+      box-shadow: 9.91px 9.91px 15px #D9DADE, -9.91px -9.91px 15px #FFFFFF;
   }
 
   .logo-login {
