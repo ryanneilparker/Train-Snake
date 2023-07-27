@@ -51,7 +51,7 @@ namespace TrainSnakeAPI.Controllers
 		public IActionResult LoginUser()
 		{
 			Console.WriteLine("At login get");
-      return Challenge(new AuthenticationProperties { RedirectUri = "/githubOAuth" }, "github");
+				return Challenge(new AuthenticationProperties { RedirectUri = "/githubOAuth" }, "github");
 		}
 
 		[HttpGet("score")]
@@ -71,7 +71,12 @@ namespace TrainSnakeAPI.Controllers
 				return BadRequest();
 			}
 
-			int score = dbContext.GameLog.Where(p => p.PlayerId == player.Id).Select(s => s.Score).Max();
+			int? score = dbContext.GameLog.Where(p => p.PlayerId == player.Id).Select(s => s.Score).Max();
+			
+			if(null == score)
+			{
+				score= 0;
+			}
 
 			var responseObject = new
 			{
