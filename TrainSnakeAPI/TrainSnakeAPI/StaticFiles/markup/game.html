@@ -1,69 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game</title>
-    <link rel="stylesheet" href="../styles/game.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../scripts/game.js" type="module" defer></script>
-    <script src="../scripts/include.js" defer></script>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <div id="navbar"></div>
-      </nav>
-    </header>
-    <article class="game-area">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game</title>
+  <link rel="stylesheet" href="../styles/game.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="../scripts/game.js" type="module" defer></script>
+  <script src="../scripts/include.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div id="navbar"></div>
+    </nav>
+  </header>
+  <article class="game-area">
     <section class="wrapper">
       <span class="game-details">
         <h3 class="score">Score: 0</h3>
         <h3 class="high-score">High Score: 0</h3>
       </span>
-      <section class="play-board"></section> 
-    </article>
+      <section class="play-board"></section>
+  </article>
+</body>
 
-    <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const accessToken = urlParams.get('access_token');
-
-      localStorage.setItem('access_token', accessToken);
-
-      const scoreBoardRoute = () => {
-        const apiUrl = '/scoreboard';
-
-        fetch(apiUrl, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${accessToken}',
-            // Add any required authentication headers if needed
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          // Check the response from the API and redirect accordingly
-          if (data.success) {
-            // Redirect to the success screen
-            window.location.href = './scores.html';
-          } else {
-            // Redirect to the error screen
-            window.location.href = '../login.html';
-          }
-        })
-        .catch(error => {
-          // Handle any errors that may occur during the API call
-          console.error('Error:', error);
-        });
-      }
-  
-      document.getElementById('scoreBoardLink').addEventListener('click', (event) => {
-        event.preventDefault(); // Prevent the default link behavior
-        scoreBoardRoute(); // Call the gameRoute function
-      });
-    </script>
-  </body>
 </html>
