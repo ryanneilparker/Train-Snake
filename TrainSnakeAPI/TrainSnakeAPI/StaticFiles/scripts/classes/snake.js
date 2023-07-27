@@ -1,9 +1,11 @@
 export class Snake{
 
-  constructor(snakeX, snakeY, heightWidth) {
+  constructor(snakeX, snakeY, heightWidth,trainImage,trainCartImage) {
     this.heightWidth = heightWidth;
     this.snakeX = snakeX;
     this.snakeY = snakeY;
+    this.trainCartImage = trainCartImage;
+    this.trainImage = trainImage;
     this.velocityX = 0;
     this.velocityY = 0;
     this.snakeBody = [];
@@ -59,6 +61,21 @@ export class Snake{
           return true;
       }
     }
+  }
+
+  getHtml(){
+    let html = '';
+    for (let i = 0; i < this.snakeBody.length; i++) {
+      let image = this.trainImage;
+      if(i > 0){
+        image = this.trainCartImage;
+      }
+      html += `<img class="head" 
+      src="${image}" 
+      style="grid-area: ${this.snakeBody[i][1]} / ${this.snakeBody[i][0]}"
+      ></img>`;
+  }
+    return html;
   }
 
 }

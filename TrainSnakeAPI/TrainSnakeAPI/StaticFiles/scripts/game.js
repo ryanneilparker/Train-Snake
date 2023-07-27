@@ -5,13 +5,15 @@ const playBoard = document.querySelector(".play-board");
 const scoreElement = document.querySelector(".score");
 const highScoreElement = document.querySelector(".high-score");
 
+
+const trainImage = '../resources/train.png';
+const trainCartImage = '../resources/car.png';
+const beerImage = "../resources/beer.png";
 const heightWidth = 20;
-const food = new Food(heightWidth);
-const snake = new Snake(5,5,heightWidth);
+const food = new Food(heightWidth,beerImage);
+const snake = new Snake(5,5,heightWidth,trainImage,trainCartImage);
 let setIntervalId;
 let score = 0;
-let trainImage = '../resources/train.png';
-let trainCartImage = '../resources/car.png';
 
 const urlParams = new URLSearchParams(window.location.search);
 const accessTokenUrl = urlParams.get('access_token');
@@ -114,10 +116,7 @@ const changeDirection = e => {
 
 const initGame = () => {
     
-    let html = `<img class="food" 
-    src="../resources/beer.png"
-    style="grid-area: ${food.getFoodPosition()[1]} / ${food.getFoodPosition()[0]}"
-    ></img>`;
+    let html = food.getHtml();
 
     if(snake.getSnakePosition()[0] == food.getFoodPosition()[0] && snake.getSnakePosition()[1] == food.getFoodPosition()[1]) {
         console.log("hit")
@@ -135,18 +134,8 @@ const initGame = () => {
       return handleGameOver();
     }
 
-    let snakeBody = snake.getSnakeBody();
+    html += snake.getHtml();
 
-    for (let i = 0; i < snakeBody.length; i++) {
-        let image = trainImage;
-        if(i > 0){
-          image = trainCartImage;
-        }
-        html += `<img class="head" 
-        src="${image}" 
-        style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"
-        ></img>`;
-    }
     playBoard.innerHTML = html;
 }
 
